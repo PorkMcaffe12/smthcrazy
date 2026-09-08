@@ -108,11 +108,11 @@ rvEls.forEach(el=>rvObs.observe(el));
 // NAV SPA LOGIC
 const mainPageSections = document.querySelectorAll('.hero, .stats-wrap, .why, .setup-outer, .showcase, #pricing-section, .reviews, .faq');
 const modulesPage = document.getElementById('modules');
-const downloadPage = { style: { display: '' } }; // placeholder, download section removed
+const downloadPage = { style: { display: '' } };
 
 function animateIn(el) {
   el.classList.remove('page-enter');
-  void el.offsetWidth; // force reflow
+  void el.offsetWidth;
   el.classList.add('page-enter');
 }
 
@@ -123,24 +123,19 @@ function showPage(page) {
 
   if (page === 'modules') {
     mainPageSections.forEach(s => s.style.display = 'none');
-    downloadPage.style.display = 'none';
     modulesPage.style.display = '';
     window.scrollTo({ top: 0 });
     animateIn(modulesPage);
   } else if (page === 'pricing') {
     modulesPage.style.display = 'none';
-    downloadPage.style.display = 'none';
     mainPageSections.forEach(s => s.style.display = '');
     setTimeout(() => document.getElementById('pricing-section').scrollIntoView({ behavior: 'smooth' }), 50);
   } else if (page === 'reviews') {
     modulesPage.style.display = 'none';
-    downloadPage.style.display = 'none';
     mainPageSections.forEach(s => s.style.display = '');
     setTimeout(() => document.getElementById('reviews').scrollIntoView({ behavior: 'smooth' }), 50);
   } else {
-    // home
     modulesPage.style.display = 'none';
-    downloadPage.style.display = 'none';
     mainPageSections.forEach(s => s.style.display = '');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
@@ -223,7 +218,7 @@ const translations = {
     step3T:'Setup complete.', step3S:'Launch the game and press Right Shift.',
     showcaseTitle:'See <span class="acc">Krypton</span> in Action', showcaseSub:'Watch Krypton on DonutSMP',
     pricingEye:'Download', pricingTitle:'Get Krypton', pricingSub:'Free download or lifetime. Pick what works for you.',
-    freeDlBtn:'Official Free Download', stripeBtn:'Pay with Card / Stripe', lifetimePeriod:'lifetime access',
+    freeDlBtn:'Official Free Download',
     reviewsEye:'Reviews', reviewsTitle:'What our users say',
     discordCtaTitle:'Thousands more reviews on our Discord',
     discordCtaSub:'Join 5,000+ players, real feedback, instant support, latest updates.',
@@ -264,7 +259,7 @@ const translations = {
     step3T:'Configuración completa.', step3S:'Lanza el juego y presiona Mayús Derecho.',
     showcaseTitle:'Ve a <span class="acc">Krypton</span> en Acción', showcaseSub:'Mira Krypton en DonutSMP',
     pricingEye:'Descargar', pricingTitle:'Obtén Krypton', pricingSub:'Descarga gratis o de por vida. Elige lo que te conviene.',
-    freeDlBtn:'Descarga Gratuita Oficial', stripeBtn:'Pagar con Tarjeta / Stripe', lifetimePeriod:'acceso de por vida',
+    freeDlBtn:'Descarga Gratuita Oficial',
     reviewsEye:'Reseñas', reviewsTitle:'Lo que dicen nuestros usuarios',
     discordCtaTitle:'Miles de reseñas más en nuestro Discord',
     discordCtaSub:'Únete a 5.000+ jugadores, opiniones reales, soporte instantáneo, últimas actualizaciones.',
@@ -305,7 +300,7 @@ const translations = {
     step3T:'Einrichtung abgeschlossen.', step3S:'Starte das Spiel und drücke Rechte Umschalttaste.',
     showcaseTitle:'Sieh <span class="acc">Krypton</span> in Aktion', showcaseSub:'Krypton auf DonutSMP ansehen',
     pricingEye:'Herunterladen', pricingTitle:'Hol dir Krypton', pricingSub:'Kostenloser Download oder lebenslang. Wähle selbst.',
-    freeDlBtn:'Offizieller kostenloser Download', stripeBtn:'Mit Karte / Stripe bezahlen', lifetimePeriod:'lebenslanger Zugang',
+    freeDlBtn:'Offizieller kostenloser Download',
     reviewsEye:'Bewertungen', reviewsTitle:'Was unsere Nutzer sagen',
     discordCtaTitle:'Tausende weitere Bewertungen auf unserem Discord',
     discordCtaSub:'Tritt 5.000+ Spielern bei, echtes Feedback, sofortiger Support, neueste Updates.',
@@ -360,7 +355,7 @@ function applyLang(lang) {
   setText('step3Title', t.step3T); setText('step3Sub', t.step3S);
   setText('showcaseTitle', t.showcaseTitle); setText('showcaseSub', t.showcaseSub);
   setText('pricingEye', t.pricingEye); setText('pricingTitle', t.pricingTitle); setText('pricingSub', t.pricingSub);
-  setText('freeDlBtn', t.freeDlBtn); setText('stripeBtn', t.stripeBtn); setText('lifetimePeriod', t.lifetimePeriod);
+  setText('freeDlBtn', t.freeDlBtn);
   setText('reviewsEye', t.reviewsEye); setText('reviewsTitle', t.reviewsTitle);
   setText('discordCtaTitle', t.discordCtaTitle); setText('discordCtaSub', t.discordCtaSub);
   document.querySelector('.btn-discord').textContent = t.btnDiscord + ' →';
@@ -381,12 +376,6 @@ function applyLang(lang) {
   });
 }
 
-// Free download button
-document.getElementById('freeDlBtn').addEventListener('click', function(e) {
-  e.stopPropagation();
-  window.open('https://example.com', '_blank');
-});
-
 const langBtn = document.getElementById('langBtn');
 const langDropdown = document.getElementById('langDropdown');
 langBtn.addEventListener('click', e => { e.stopPropagation(); langDropdown.style.display = langDropdown.style.display === 'none' ? 'block' : 'none'; });
@@ -395,4 +384,5 @@ document.querySelectorAll('.lang-opt').forEach(opt => {
   opt.addEventListener('mouseover', () => { if(opt.style.color !== 'var(--cyan)') opt.style.background = 'rgba(255,255,255,0.05)'; });
   opt.addEventListener('mouseout', () => { if(opt.style.color !== 'var(--cyan)') opt.style.background = 'transparent'; });
   opt.addEventListener('click', () => { applyLang(opt.dataset.lang); langDropdown.style.display = 'none'; });
-});</script></body></html>
+});
+</script></body></html>
